@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Filter, Columns, Plus, AlertCircle, AlertTriangle, Info } from 'lucide-react';
+import { Search, Filter, Columns, Plus} from 'lucide-react';
 import toast from 'react-hot-toast';
 import Sidebar from '../components/Sidebar';
 import SeverityBadge from '../components/SeverityBadge';
 import StatusChip from '../components/StatusChip';
 import ThemeToggle from '../components/ThemeToggle';
-import { mockScans, mockOrgStats } from '../data/mockData';
+import { mockScans } from '../data/mockData';
 import { X } from 'lucide-react';
 const Scan = () => {
 const [isFilterOpen, setIsFilterOpen] = useState(false);
 const [selectedStatus, setSelectedStatus] = useState('all');
 const [selectedType, setSelectedType] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+const navigate = useNavigate();
 
 
 const filteredScans = mockScans.filter((scan) => {
@@ -28,6 +29,10 @@ const filteredScans = mockScans.filter((scan) => {
 
   return matchesSearch && matchesStatus && matchesType;
 });
+
+const handleScanClick = (scanId) => {
+  navigate(`/scan/${scanId}`);
+};
 
 
   return (
